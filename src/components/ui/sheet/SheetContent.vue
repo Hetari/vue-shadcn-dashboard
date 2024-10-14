@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { type HTMLAttributes, computed } from 'vue'
+import { cn } from '@/lib/utils'
+import { Cross2Icon } from '@radix-icons/vue'
 import {
   DialogClose,
   DialogContent,
@@ -9,14 +10,12 @@ import {
   DialogPortal,
   useForwardPropsEmits,
 } from 'radix-vue'
-import { Cross2Icon } from '@radix-icons/vue'
+import { computed, type HTMLAttributes } from 'vue'
 import { type SheetVariants, sheetVariants } from '.'
-import { cn } from '@/lib/utils'
 
 interface SheetContentProps extends DialogContentProps {
   class?: HTMLAttributes['class']
   side?: SheetVariants['side']
-  showClose?: boolean
 }
 
 defineOptions({
@@ -48,7 +47,6 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits)
       <slot />
 
       <DialogClose
-        v-if="props.showClose"
         class="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-secondary"
       >
         <Cross2Icon class="w-4 h-4" />
